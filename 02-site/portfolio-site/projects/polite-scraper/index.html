@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Polite Scraper — Ziyad Alboghdady</title>
+<meta name="description" content="Turns three pages of messy HTML into 60 schema-validated JSON records without ever being rude to the server &mdash; and without losing good data when one page is broken.">
+<link rel="canonical" href="https://ziyad-alboghdady.netlify.app/projects/polite-scraper/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Polite Scraper — Ziyad Alboghdady">
+<meta property="og:description" content="Turns three pages of messy HTML into 60 schema-validated JSON records without ever being rude to the server &mdash; and without losing good data when one page is broken.">
+<meta property="og:url" content="https://ziyad-alboghdady.netlify.app/projects/polite-scraper/">
+<meta property="og:image" content="https://ziyad-alboghdady.netlify.app/assets/img/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="mark">&#123;ZB&#125;</span><span class="name">Ziyad Alboghdady</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+      <a class="btn btn-primary" href="/contact/">Contact me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Case study</p>
+    <h1>The Polite Scraper</h1>
+    <p class="lede">Turns three pages of messy HTML into 60 schema-validated JSON records without ever being rude to the server &mdash; and without losing good data when one page is broken.</p>
+    <div class="meta">
+      <div><span class="k">Stack</span><span class="v">C# &middot; .NET 9 &middot; HttpClient &middot; Schema validation &middot; On-disk cache &middot; Exponential backoff</span></div>
+      <div><span class="k">Role</span><span class="v">Sole engineer</span></div>
+      <div><span class="k">When</span><span class="v">2026</span></div>
+      <div><span class="k">Source</span><span class="v"><a href="https://github.com/ziyad-alboghdady/polite-scraper" rel="noopener">GitHub repository</a></span></div>
+    </div>
+
+    <div class="beats">
+      <div class="beat"><h2>The problem</h2><p>Writing something that fetches 60 pages takes an afternoon. Writing one that a server operator would not
+     want blocked is a different problem: it has to identify itself, pace itself, never retry an answer, and keep the
+     records it already has when one page fails.</p></div>
+      <div class="beat"><h2>What I did &amp; decided</h2><ul>
+     <li>Checked before collecting, and wrote the check down: what the site is, what <code>robots.txt</code> says,
+         whether terms exist, whether any personal data is involved. <strong>A 404 on robots.txt means no rules were
+         stated, not that anything goes</strong> &mdash; it removes a prohibition, not the obligation to behave.</li>
+     <li>Confined every network call to one class, <code>PoliteHttpClient</code>, so the rules are enforced in a single
+         place instead of remembered at each call site.</li>
+     <li>Set an identifying User-Agent with a contact address, and made the program warn when it is unset. A scraper
+         nobody can contact is an anonymous one.</li>
+     <li>500 ms delay plus jitter: 60 requests in two seconds looks like an attack; spread over ~35 seconds it looks
+         like a reader.</li>
+     <li>Retried only timeouts and 5xx, with exponential backoff. <strong>A 404 is never retried &mdash; it is an
+         answer, not an accident.</strong></li>
+     <li>Added an on-disk cache so repeated runs are byte-identical and cost the server nothing, and emitted a run
+         report and an error file alongside the data.</li>
+   </ul></div>
+      <div class="beat"><h2>What came of it</h2><ul>
+     <li>A cold run takes ~41 seconds, 22 of which is deliberate waiting. A second run finishes in under a second,
+         entirely from cache.</li>
+     <li>A broken page produces an error record, not a lost dataset &mdash; partial failure stays partial.</li>
+     <li>Reruns are byte-identical, which makes the output diffable and the whole thing testable.</li>
+   </ul></div>
+    </div>
+
+    <figure>
+      <div class="placeholder">REAL CAPTURE SLOT<br>Terminal output of a cold run and a cached rerun side by side, plus a slice of books.json.<br>Save as /assets/img/polite-scraper.png</div>
+      <figcaption>Real capture from the build &mdash; not a rendering.</figcaption>
+    </figure>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact/">Invite me to a technical interview</a>
+      <a class="btn btn-ghost" href="https://github.com/ziyad-alboghdady/polite-scraper" rel="noopener">Read the code</a>
+    </div>
+    <p style="margin-top:var(--s3)">Next case: <a href="/projects/task-management-api/">Task Management API</a></p>
+  </div>
+</section></main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>&copy; 2026 Ziyad Alboghdady &middot; Backend software engineer &middot; Sakarya, Turkey</div>
+    <div>
+      <a href="mailto:ziyadalboghdady@gmail.com">Email</a> &middot;
+      <a href="https://github.com/ziyad-alboghdady" rel="noopener">GitHub</a> &middot;
+      <a href="https://www.linkedin.com/in/ziyad-alboghdady-a50ab8247" rel="noopener">LinkedIn</a> &middot;
+      <a href="/assets/Ziyad-Alboghdady-CV.pdf">CV (PDF)</a>
+    </div>
+    <!-- FlyRank graduate badge goes here once the capstone is approved (Week 7: Plant Your Flag). -->
+  </div>
+</footer>
+</body>
+</html>

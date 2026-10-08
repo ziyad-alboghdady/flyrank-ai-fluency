@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case studies — Ziyad Alboghdady</title>
+<meta name="description" content="Four backend case studies: a layered ASP.NET Core Web API, a 14-table car rental system, a university management platform, and a SignalR real-time service.">
+<link rel="canonical" href="https://ziyad-alboghdady.netlify.app/projects/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Case studies — Ziyad Alboghdady">
+<meta property="og:description" content="Four backend case studies: a layered ASP.NET Core Web API, a 14-table car rental system, a university management platform, and a SignalR real-time service.">
+<meta property="og:url" content="https://ziyad-alboghdady.netlify.app/projects/">
+<meta property="og:image" content="https://ziyad-alboghdady.netlify.app/assets/img/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="mark">&#123;ZB&#125;</span><span class="name">Ziyad Alboghdady</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+      <a class="btn btn-primary" href="/contact/">Contact me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h1>Case studies</h1>
+      <p>Four systems, strongest first. Every one lists the decision I made and what it cost me.</p>
+    </div>
+    <div class="grid grid-2">
+  <article class="card">
+    <h3><a href="/projects/task-management-api/">Task Management API</a></h3>
+    <p class="v" style="font-family:var(--font-mono);font-size:.8rem;color:var(--accent)">.NET 9 &middot; PostgreSQL 16 &middot; Docker Compose &middot; Supabase Auth</p>
+    <p>A containerised REST API where ownership is impossible to forget, token revocation is immediate, and the API never stores a password.</p>
+    <ul class="stack"><li>.NET 9 Web API</li><li>C#</li><li>EF Core</li><li>PostgreSQL 16</li><li>Docker Compose</li><li>Supabase Auth</li><li>JWT middleware</li></ul>
+    <p class="more"><a href="/projects/task-management-api/">Read the decisions &rarr;</a></p>
+  </article>
+  <article class="card">
+    <h3><a href="/projects/car-rental-system/">Car Rental Management System</a></h3>
+    <p class="v" style="font-family:var(--font-mono);font-size:.8rem;color:var(--accent)">ASP.NET Core MVC &middot; EF Core &middot; SQL Server</p>
+    <p>Seven modules over one relational core &mdash; cars, customers, employees, contracts, payments and licences &mdash; with the invariants pushed down into the database rather than trusted to the UI.</p>
+    <ul class="stack"><li>ASP.NET Core MVC</li><li>C#</li><li>EF Core</li><li>SQL Server</li><li>ASP.NET Core Identity</li><li>Triggers & stored functions</li></ul>
+    <p class="more"><a href="/projects/car-rental-system/">Read the decisions &rarr;</a></p>
+  </article>
+  <article class="card">
+    <h3><a href="/projects/university-management-platform/">University Management System</a></h3>
+    <p class="v" style="font-family:var(--font-mono);font-size:.8rem;color:var(--accent)">ASP.NET Core MVC + Web API &middot; EF Core</p>
+    <p>One domain served two ways &mdash; Razor views for staff, a REST API for everything else &mdash; without duplicating the data layer.</p>
+    <ul class="stack"><li>ASP.NET Core MVC</li><li>Web API</li><li>EF Core</li><li>ASP.NET Identity</li><li>Repository pattern</li><li>DTOs</li><li>Pagination</li></ul>
+    <p class="more"><a href="/projects/university-management-platform/">Read the decisions &rarr;</a></p>
+  </article>
+  <article class="card">
+    <h3><a href="/projects/polite-scraper/">The Polite Scraper</a></h3>
+    <p class="v" style="font-family:var(--font-mono);font-size:.8rem;color:var(--accent)">C# / .NET 9 &middot; rate limiting, caching, partial failure</p>
+    <p>Turns three pages of messy HTML into 60 schema-validated JSON records without ever being rude to the server &mdash; and without losing good data when one page is broken.</p>
+    <ul class="stack"><li>C#</li><li>.NET 9</li><li>HttpClient</li><li>Schema validation</li><li>On-disk cache</li><li>Exponential backoff</li></ul>
+    <p class="more"><a href="/projects/polite-scraper/">Read the decisions &rarr;</a></p>
+  </article></div>
+  </div>
+</section></main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>&copy; 2026 Ziyad Alboghdady &middot; Backend software engineer &middot; Sakarya, Turkey</div>
+    <div>
+      <a href="mailto:ziyadalboghdady@gmail.com">Email</a> &middot;
+      <a href="https://github.com/ziyad-alboghdady" rel="noopener">GitHub</a> &middot;
+      <a href="https://www.linkedin.com/in/ziyad-alboghdady-a50ab8247" rel="noopener">LinkedIn</a> &middot;
+      <a href="/assets/Ziyad-Alboghdady-CV.pdf">CV (PDF)</a>
+    </div>
+    <!-- FlyRank graduate badge goes here once the capstone is approved (Week 7: Plant Your Flag). -->
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task Management API — Ziyad Alboghdady</title>
+<meta name="description" content="A containerised REST API where ownership is impossible to forget, token revocation is immediate, and the API never stores a password.">
+<link rel="canonical" href="https://ziyad-alboghdady.netlify.app/projects/task-management-api/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Task Management API — Ziyad Alboghdady">
+<meta property="og:description" content="A containerised REST API where ownership is impossible to forget, token revocation is immediate, and the API never stores a password.">
+<meta property="og:url" content="https://ziyad-alboghdady.netlify.app/projects/task-management-api/">
+<meta property="og:image" content="https://ziyad-alboghdady.netlify.app/assets/img/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="mark">&#123;ZB&#125;</span><span class="name">Ziyad Alboghdady</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+      <a class="btn btn-primary" href="/contact/">Contact me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Case study</p>
+    <h1>Task Management API</h1>
+    <p class="lede">A containerised REST API where ownership is impossible to forget, token revocation is immediate, and the API never stores a password.</p>
+    <div class="meta">
+      <div><span class="k">Stack</span><span class="v">.NET 9 Web API &middot; C# &middot; EF Core &middot; PostgreSQL 16 &middot; Docker Compose &middot; Supabase Auth &middot; JWT middleware</span></div>
+      <div><span class="k">Role</span><span class="v">Sole engineer</span></div>
+      <div><span class="k">When</span><span class="v">2026</span></div>
+      <div><span class="k">Source</span><span class="v"><a href="https://github.com/ziyad-alboghdady/dotnet-layered-architecture-task-api" rel="noopener">GitHub repository</a></span></div>
+    </div>
+
+    <div class="beats">
+      <div class="beat"><h2>The problem</h2><p>A task API is only interesting once more than one person uses it. Then two things get hard: proving who
+     the caller is, and guaranteeing that a caller can never touch another user's rows. Both are easy to get almost right
+     &mdash; and &ldquo;almost right&rdquo; on an authorisation boundary is indistinguishable from broken.</p></div>
+      <div class="beat"><h2>What I did &amp; decided</h2><ul>
+     <li>Split the service into Controllers &rarr; Services &rarr; Repositories, with <code>ITasksRepository</code>
+         implemented by <code>PostgresTasksRepository</code> over EF Core, so storage stays behind one seam.</li>
+     <li>Made Supabase the identity provider and this API a pure resource server: <strong>it never stores a password
+         and never signs a token</strong>, it only verifies them. One less thing to get catastrophically wrong.</li>
+     <li>Put authentication in <code>SupabaseAuthMiddleware</code> rather than in controllers, so controllers contain
+         no auth code at all. <code>ErrorHandlerMiddleware</code> wraps it from the outside, so an exception thrown by
+         the auth guard is still handled.</li>
+     <li><strong>Chose a network round-trip over a local JWKS signature check.</strong> Local verification is
+         microseconds; the round-trip costs latency and fails when Supabase is down. I took the slower option because
+         it rejects a revoked token immediately, where a local check honours it until it expires. When Supabase is
+         unreachable the API returns 503, not 401 &mdash; an outage is not the caller's fault, and re-authenticating
+         cannot fix it.</li>
+     <li>Made ownership a <em>required parameter</em> on every repository query rather than a check inside each method,
+         so it cannot be omitted by accident. The owner is always taken from the verified token, never the request body.</li>
+     <li>Requesting someone else's task returns <strong>404, not 403</strong> &mdash; a 403 would confirm that the id exists.</li>
+     <li>All configuration comes from environment variables; <code>appsettings.json</code> holds no secrets and no
+         connection string. Missing config throws at startup with a readable message instead of a null reference on
+         the first request.</li>
+   </ul></div>
+      <div class="beat"><h2>What came of it</h2><ul>
+     <li>Cross-user access is structurally impossible, not policed: the query will not compile without an owner.</li>
+     <li>A revoked session stops working on the next request rather than at token expiry.</li>
+     <li><code>docker compose up</code> brings the API and PostgreSQL 16 up together with a named volume, so data
+         survives a reboot and a reviewer can run the whole thing without installing a database.</li>
+     <li>The trade-off table is in the README, because the interesting part of this project is the decision, not the CRUD.</li>
+   </ul></div>
+    </div>
+
+    <figure>
+      <div class="placeholder">REAL CAPTURE SLOT<br>Swagger UI with a 401 and a 404 side by side, plus the docker compose up output showing both services healthy.<br>Save as /assets/img/task-management-api.png</div>
+      <figcaption>Real capture from the build &mdash; not a rendering.</figcaption>
+    </figure>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact/">Invite me to a technical interview</a>
+      <a class="btn btn-ghost" href="https://github.com/ziyad-alboghdady/dotnet-layered-architecture-task-api" rel="noopener">Read the code</a>
+    </div>
+    <p style="margin-top:var(--s3)">Next case: <a href="/projects/car-rental-system/">Car Rental Management System</a></p>
+  </div>
+</section></main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>&copy; 2026 Ziyad Alboghdady &middot; Backend software engineer &middot; Sakarya, Turkey</div>
+    <div>
+      <a href="mailto:ziyadalboghdady@gmail.com">Email</a> &middot;
+      <a href="https://github.com/ziyad-alboghdady" rel="noopener">GitHub</a> &middot;
+      <a href="https://www.linkedin.com/in/ziyad-alboghdady-a50ab8247" rel="noopener">LinkedIn</a> &middot;
+      <a href="/assets/Ziyad-Alboghdady-CV.pdf">CV (PDF)</a>
+    </div>
+    <!-- FlyRank graduate badge goes here once the capstone is approved (Week 7: Plant Your Flag). -->
+  </div>
+</footer>
+</body>
+</html>

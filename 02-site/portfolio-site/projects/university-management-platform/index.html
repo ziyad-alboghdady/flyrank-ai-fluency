@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>University Management System — Ziyad Alboghdady</title>
+<meta name="description" content="One domain served two ways &mdash; Razor views for staff, a REST API for everything else &mdash; without duplicating the data layer.">
+<link rel="canonical" href="https://ziyad-alboghdady.netlify.app/projects/university-management-platform/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="University Management System — Ziyad Alboghdady">
+<meta property="og:description" content="One domain served two ways &mdash; Razor views for staff, a REST API for everything else &mdash; without duplicating the data layer.">
+<meta property="og:url" content="https://ziyad-alboghdady.netlify.app/projects/university-management-platform/">
+<meta property="og:image" content="https://ziyad-alboghdady.netlify.app/assets/img/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="mark">&#123;ZB&#125;</span><span class="name">Ziyad Alboghdady</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+      <a class="btn btn-primary" href="/contact/">Contact me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Case study</p>
+    <h1>University Management System</h1>
+    <p class="lede">One domain served two ways &mdash; Razor views for staff, a REST API for everything else &mdash; without duplicating the data layer.</p>
+    <div class="meta">
+      <div><span class="k">Stack</span><span class="v">ASP.NET Core MVC &middot; Web API &middot; EF Core &middot; ASP.NET Identity &middot; Repository pattern &middot; DTOs &middot; Pagination</span></div>
+      <div><span class="k">Role</span><span class="v">Sole engineer</span></div>
+      <div><span class="k">When</span><span class="v">2026</span></div>
+      <div><span class="k">Source</span><span class="v"><a href="https://github.com/ziyad-alboghdady/ASP.NET-University-Management-System" rel="noopener">GitHub repository</a></span></div>
+    </div>
+
+    <div class="beats">
+      <div class="beat"><h2>The problem</h2><p>The same university data needed a UI for staff and a JSON API for other systems. The naive answer is
+     two codebases that drift apart within a month. The real question was how much could be shared before the sharing
+     itself became the problem.</p></div>
+      <div class="beat"><h2>What I did &amp; decided</h2><ul>
+     <li>Shared one repository layer and one <code>DbContext</code> between MVC controllers and API controllers, so a
+         query is written once and both surfaces inherit it.</li>
+     <li>Kept the <em>shapes</em> separate: ViewModels for Razor, DTOs for the API. Sharing the data access is cheap;
+         sharing the response shape is how an API ends up leaking form state.</li>
+     <li>Put pagination on both surfaces from the start &mdash; <code>?pageNumber=1&amp;pageSize=5</code> &mdash;
+         because an unbounded student list is a production incident waiting for enrolment season.</li>
+     <li>Used ASP.NET Identity with role-based authorisation, with destructive operations (deleting a student) reserved
+         to admins.</li>
+     <li>Handled student photo upload to <code>wwwroot/StudentPictures</code> rather than storing binaries in the database.</li>
+   </ul></div>
+      <div class="beat"><h2>What came of it</h2><ul>
+     <li>Adding a field means one entity, one repository method, and two small shape changes &mdash; not two features.</li>
+     <li>List endpoints stay flat in response time as records grow.</li>
+     <li>The API is usable by something that is not my own UI, which is the only real test of whether it is an API.</li>
+   </ul></div>
+    </div>
+
+    <figure>
+      <div class="placeholder">REAL CAPTURE SLOT<br>Side-by-side: the Razor student list and GET /api/students?pageNumber=1&pageSize=5 returning the same data.<br>Save as /assets/img/university-management-platform.png</div>
+      <figcaption>Real capture from the build &mdash; not a rendering.</figcaption>
+    </figure>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact/">Invite me to a technical interview</a>
+      <a class="btn btn-ghost" href="https://github.com/ziyad-alboghdady/ASP.NET-University-Management-System" rel="noopener">Read the code</a>
+    </div>
+    <p style="margin-top:var(--s3)">Next case: <a href="/projects/polite-scraper/">The Polite Scraper</a></p>
+  </div>
+</section></main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>&copy; 2026 Ziyad Alboghdady &middot; Backend software engineer &middot; Sakarya, Turkey</div>
+    <div>
+      <a href="mailto:ziyadalboghdady@gmail.com">Email</a> &middot;
+      <a href="https://github.com/ziyad-alboghdady" rel="noopener">GitHub</a> &middot;
+      <a href="https://www.linkedin.com/in/ziyad-alboghdady-a50ab8247" rel="noopener">LinkedIn</a> &middot;
+      <a href="/assets/Ziyad-Alboghdady-CV.pdf">CV (PDF)</a>
+    </div>
+    <!-- FlyRank graduate badge goes here once the capstone is approved (Week 7: Plant Your Flag). -->
+  </div>
+</footer>
+</body>
+</html>

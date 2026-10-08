@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Car Rental Management System — Ziyad Alboghdady</title>
+<meta name="description" content="Seven modules over one relational core &mdash; cars, customers, employees, contracts, payments and licences &mdash; with the invariants pushed down into the database rather than trusted to the UI.">
+<link rel="canonical" href="https://ziyad-alboghdady.netlify.app/projects/car-rental-system/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Car Rental Management System — Ziyad Alboghdady">
+<meta property="og:description" content="Seven modules over one relational core &mdash; cars, customers, employees, contracts, payments and licences &mdash; with the invariants pushed down into the database rather than trusted to the UI.">
+<meta property="og:url" content="https://ziyad-alboghdady.netlify.app/projects/car-rental-system/">
+<meta property="og:image" content="https://ziyad-alboghdady.netlify.app/assets/img/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="mark">&#123;ZB&#125;</span><span class="name">Ziyad Alboghdady</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/">Home</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a>
+      <a class="btn btn-primary" href="/contact/">Contact me</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Case study</p>
+    <h1>Car Rental Management System</h1>
+    <p class="lede">Seven modules over one relational core &mdash; cars, customers, employees, contracts, payments and licences &mdash; with the invariants pushed down into the database rather than trusted to the UI.</p>
+    <div class="meta">
+      <div><span class="k">Stack</span><span class="v">ASP.NET Core MVC &middot; C# &middot; EF Core &middot; SQL Server &middot; ASP.NET Core Identity &middot; Triggers & stored functions</span></div>
+      <div><span class="k">Role</span><span class="v">Sole engineer</span></div>
+      <div><span class="k">When</span><span class="v">2026</span></div>
+      <div><span class="k">Source</span><span class="v"><a href="https://github.com/ziyad-alboghdady/car-rental-management-system" rel="noopener">GitHub repository</a></span></div>
+    </div>
+
+    <div class="beats">
+      <div class="beat"><h2>The problem</h2><p>A rental company's data is all constraints: a car cannot be on two contracts at once, a contract cannot
+     exist without a valid licence, a payment cannot outlive its contract. Enforce those only in C# and they hold until
+     the day someone writes to the database another way.</p></div>
+      <div class="beat"><h2>What I did &amp; decided</h2><ul>
+     <li>Modelled the domain across seven modules &mdash; cars catalogue, customers, employees, rental contracts,
+         payments, licences and accounts &mdash; each with its own controller and a clean MVC separation.</li>
+     <li>Used EF Core with code-first migrations for the schema, but kept <strong>constraints, stored functions and
+         triggers in SQL</strong> so the invariants live with the data, not only with the application.</li>
+     <li>Added ASP.NET Core Identity for authentication and role-based authorisation over provisioning, pricing and
+         rental history.</li>
+     <li>Committed the SQL scripts and seed data to <code>db/</code> so the schema is reviewable on its own, without
+         reading the C#.</li>
+   </ul></div>
+      <div class="beat"><h2>What came of it</h2><ul>
+     <li>The rules survive a direct write. Anything that bypasses the app still meets the same constraints.</li>
+     <li>A reviewer can read the schema without reading the application &mdash; which is how a reviewer actually reads.</li>
+     <li>Views stay free of query logic; data access lives where it can be changed once.</li>
+   </ul></div>
+    </div>
+
+    <figure>
+      <div class="placeholder">REAL CAPTURE SLOT<br>ERD of the schema, plus a rejected invalid contract showing the constraint firing.<br>Save as /assets/img/car-rental-system.png</div>
+      <figcaption>Real capture from the build &mdash; not a rendering.</figcaption>
+    </figure>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/contact/">Invite me to a technical interview</a>
+      <a class="btn btn-ghost" href="https://github.com/ziyad-alboghdady/car-rental-management-system" rel="noopener">Read the code</a>
+    </div>
+    <p style="margin-top:var(--s3)">Next case: <a href="/projects/university-management-platform/">University Management System</a></p>
+  </div>
+</section></main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>&copy; 2026 Ziyad Alboghdady &middot; Backend software engineer &middot; Sakarya, Turkey</div>
+    <div>
+      <a href="mailto:ziyadalboghdady@gmail.com">Email</a> &middot;
+      <a href="https://github.com/ziyad-alboghdady" rel="noopener">GitHub</a> &middot;
+      <a href="https://www.linkedin.com/in/ziyad-alboghdady-a50ab8247" rel="noopener">LinkedIn</a> &middot;
+      <a href="/assets/Ziyad-Alboghdady-CV.pdf">CV (PDF)</a>
+    </div>
+    <!-- FlyRank graduate badge goes here once the capstone is approved (Week 7: Plant Your Flag). -->
+  </div>
+</footer>
+</body>
+</html>

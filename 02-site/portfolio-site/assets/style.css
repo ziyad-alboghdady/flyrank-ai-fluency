@@ -1,0 +1,173 @@
+/* Ziyad Alboghdady — portfolio
+   Identity kit: Plus Jakarta Sans (headings) / Inter (body) / JetBrains Mono (code)
+   Canvas #F8FAFC · Ink #0F172A · Structure #1E293B · Accent #2563EB */
+
+:root{
+  --paper:#F8FAFC;
+  --paper-elev:#FFFFFF;
+  --ink:#0F172A;
+  --ink-mute:#475569;
+  --structure:#1E293B;
+  --line:#E2E8F0;
+  --accent:#2563EB;
+  --accent-soft:#EFF6FF;
+  --radius:10px;
+  --s1:8px; --s2:16px; --s3:24px; --s4:48px; --s5:64px;
+  --maxw:1080px;
+  --font-head:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--accent);outline-offset:2px;border-radius:4px;
+}
+h1,h2,h3,h4{font-family:var(--font-head);font-weight:700;line-height:1.2;color:var(--ink);margin:0 0 var(--s2)}
+h1{font-size:clamp(1.9rem,1.3rem + 2.4vw,3rem);letter-spacing:-.02em}
+h2{font-size:clamp(1.4rem,1.1rem + 1.1vw,1.9rem);letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0 0 var(--s2)}
+code,kbd{font-family:var(--font-mono);font-size:.88em}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:var(--s2);top:var(--s2);z-index:100;background:var(--ink);color:#fff;padding:var(--s1) var(--s2);border-radius:6px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--s3)}
+
+/* ---------- header ---------- */
+.site-head{border-bottom:1px solid var(--line);background:rgba(248,250,252,.9);backdrop-filter:blur(8px);position:sticky;top:0;z-index:20}
+.site-head .wrap{display:flex;align-items:center;gap:var(--s3);min-height:64px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;color:var(--ink);letter-spacing:.01em}
+.brand:hover{text-decoration:none}
+.brand .mark{font-family:var(--font-mono);font-size:.8rem;background:var(--ink);color:#fff;padding:5px 7px;border-radius:7px;letter-spacing:.02em}
+.brand .name{font-size:.95rem;text-transform:uppercase;letter-spacing:.06em}
+.nav{margin-left:auto;display:flex;gap:var(--s3);align-items:center;flex-wrap:wrap}
+.nav a{color:var(--ink-mute);font-size:.95rem;font-weight:500}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--ink);text-decoration:none}
+.nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--accent)}
+.nav .btn{color:#fff}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-body);font-weight:600;font-size:.95rem;
+  padding:11px 18px;border-radius:var(--radius);border:1px solid transparent;
+  min-height:44px;cursor:pointer;transition:background .15s,border-color .15s,color .15s;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#1D4ED8;text-decoration:none;color:#fff}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--structure);text-decoration:none}
+
+/* ---------- hero ---------- */
+.hero{padding:var(--s5) 0 var(--s4)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 var(--s2)}
+.claim{max-width:26ch}
+.lede{font-size:1.1rem;color:var(--ink-mute);max-width:62ch}
+.stack{display:flex;flex-wrap:wrap;gap:var(--s1);list-style:none;padding:0;margin:var(--s3) 0}
+.stack li{font-family:var(--font-mono);font-size:.78rem;border:1px solid var(--line);background:var(--paper-elev);color:var(--structure);padding:5px 10px;border-radius:999px}
+.actions{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s3)}
+
+/* ---------- sections ---------- */
+section{padding:var(--s4) 0}
+.section-head{margin-bottom:var(--s3)}
+.section-head p{color:var(--ink-mute);margin:0}
+hr.rule{border:0;border-top:1px solid var(--line);margin:0}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:var(--s3)}
+@media(min-width:760px){.grid-2{grid-template-columns:repeat(2,1fr)}}
+.card{
+  background:var(--paper-elev);border:1px solid var(--line);border-radius:var(--radius);
+  padding:var(--s3);display:flex;flex-direction:column;gap:var(--s1);
+}
+.card h3{margin:0}
+.card p{color:var(--ink-mute);margin:0}
+.card .stack{margin:var(--s1) 0 0}
+.card .more{margin-top:auto;padding-top:var(--s2);font-weight:600;font-size:.95rem}
+
+/* ---------- case study page ---------- */
+.beats{counter-reset:beat}
+.beat{border-left:3px solid var(--line);padding:0 0 var(--s3) var(--s3);margin-left:4px}
+.beat:last-child{padding-bottom:0}
+.beat h2{font-size:1.15rem;margin-bottom:var(--s1)}
+.beat h2::before{
+  counter-increment:beat;content:counter(beat);
+  font-family:var(--font-mono);font-size:.75rem;color:var(--accent);
+  border:1px solid var(--accent);border-radius:50%;
+  width:22px;height:22px;display:inline-grid;place-items:center;margin-right:10px;vertical-align:2px;
+}
+.beat ul{margin:0 0 var(--s2);padding-left:1.1rem;color:var(--ink-mute)}
+.beat li{margin-bottom:6px}
+.meta{display:grid;gap:var(--s1);margin:var(--s3) 0;padding:var(--s3);background:var(--paper-elev);border:1px solid var(--line);border-radius:var(--radius)}
+.meta div{display:flex;gap:var(--s2);font-size:.92rem;flex-wrap:wrap}
+.meta dt,.meta .k{font-weight:600;min-width:120px;color:var(--structure)}
+.meta .v{color:var(--ink-mute);font-family:var(--font-mono);font-size:.85rem}
+
+figure{margin:var(--s3) 0}
+figure img{border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-elev)}
+figcaption{font-size:.85rem;color:var(--ink-mute);margin-top:var(--s1)}
+.placeholder{
+  border:1px dashed #94A3B8;border-radius:var(--radius);background:var(--accent-soft);
+  padding:var(--s4) var(--s3);text-align:center;color:var(--structure);
+  font-family:var(--font-mono);font-size:.82rem;line-height:1.6;
+}
+
+pre{
+  background:var(--structure);color:#E2E8F0;padding:var(--s3);border-radius:var(--radius);
+  overflow-x:auto;font-family:var(--font-mono);font-size:.82rem;line-height:1.6;
+}
+
+/* ---------- lists ---------- */
+.plain{list-style:none;padding:0;margin:0;display:grid;gap:var(--s2)}
+.plain li{display:flex;gap:var(--s2);align-items:baseline}
+.plain .k{font-weight:600;min-width:130px}
+.plain .v{color:var(--ink-mute)}
+
+/* ---------- form ---------- */
+form{display:grid;gap:var(--s2);max-width:560px}
+label{font-weight:600;font-size:.92rem;display:block;margin-bottom:6px}
+input,textarea{
+  width:100%;font:inherit;font-size:1rem;padding:12px 14px;min-height:44px;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-elev);color:var(--ink);
+}
+textarea{min-height:150px;resize:vertical}
+input:user-invalid,textarea:user-invalid{border-color:#B91C1C}
+.hp{position:absolute;left:-9999px}
+.form-note{font-size:.88rem;color:var(--ink-mute)}
+.status{padding:var(--s2);border-radius:var(--radius);font-size:.95rem}
+.status.ok{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46}
+.status.err{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B}
+
+/* ---------- footer ---------- */
+.site-foot{border-top:1px solid var(--line);padding:var(--s4) 0;margin-top:var(--s4);color:var(--ink-mute);font-size:.92rem}
+.site-foot .wrap{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;justify-content:space-between}
+.site-foot a{color:var(--ink-mute)}
+.site-foot .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--paper-elev);border-radius:999px;padding:6px 12px;font-size:.82rem}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- narrow screens (fixes found testing at 390px) ---------- */
+@media (max-width:560px){
+  body{font-size:16px}
+  .wrap{padding:0 var(--s2)}
+  .nav{gap:var(--s2)}
+  .nav .btn{display:none}          /* the text "Contact" link already covers this */
+  .plain li{flex-direction:column;gap:2px}
+  .plain .k{min-width:0}
+  .meta div{flex-direction:column;gap:2px}
+  .meta .k{min-width:0}
+  .actions .btn{flex:1 1 100%;justify-content:center}
+  .beat{padding-left:var(--s2)}
+  pre{font-size:.78rem}
+  .site-foot .wrap{gap:var(--s2)}
+}
